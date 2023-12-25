@@ -74,10 +74,13 @@ class Main {
             users.child(user).addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     val changedUser = dataSnapshot.getValue(User::class.java)
-                    if (changedUser != null) {
+                    if (changedUser != null && new_password!="") {
                         changedUser.password = new_password
                         Toast.makeText(context, "Your password is successfully changed", Toast.LENGTH_SHORT).show()
 
+                    }
+                    else{
+                        Toast.makeText(context, "Password can't be changed", Toast.LENGTH_SHORT).show()
                     }
                     users.child(user).setValue(changedUser)
                 }
